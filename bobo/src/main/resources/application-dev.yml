@@ -1,0 +1,31 @@
+#服务器的端口
+server.port: 9180
+#应用访问路径
+server:
+  servlet:
+    context-path: /bobo
+#jsp
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+    #配置数据源
+    #datasource:
+    #username: ce6
+    #password: bangsun
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
+    #url: jdbc:oracle:thin:@192.168.47.129:1521:orcl
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://196.168.47.130:3306/nameList?useUnicode=true&characterEncoding=utf8&useSSL=false
+#自创建bean
+bsfit:
+  name: bangsun
+  age: 10
+#工程启动时，加载的日志配置文件
+#定义工程日志文件
+#logging:
+#  config:

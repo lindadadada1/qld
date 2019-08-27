@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    scan属性设置为true时，配置文件发生变化，将会被重新加载，默认值为true
+    scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位为毫秒。
+                该属性当scan为true时，此属性才生效
+    debug：如果属性设置为true时，将打印出logback内部的日志信息，实时查看logback运行状态，默认值为false
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 开启JMX管理日志 -->
+    <jmxConfigurator/>
+
+    <property name="log.home_dir" value="d:/logger"/>
+
+    <!--将日志输出到控制台-->
+    <!--
+        name属性：定义该日志追加器的名称
+        class属性：定义日志追加器的全限定类名
+    -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                <!--设置日志输出格式-->
+                [qld] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5p] %c:%L - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--文件追加器-->
+    <appender name="infoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--file:指定日志输出的位置及名称，位置可以是相对的也可以是绝对的-->
+        <file>${log.home_dir}/info.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--保留的天数-->
+            <maxHistory>30</maxHistory>
+            <!--
+            当前日志超过指定大小进行压缩之后的文件名称以及文件的位置，位置是相对的，也可以是绝对的
+            -->
+            <fileNamePattern>${log.home_dir}/info/info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--定义单个日志文件的大小最大值-->
+                <MaxFileSize>2mb</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>
+                <!--设置日志输出格式-->
+                [logback-demo2] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5p] %c:%L - %m%n
+            </pattern>
+        </encoder>
+
+        <!--info过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--文件追加器-->
+    <appender name="warnFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--file:指定日志输出的位置及名称，位置可以是相对的也可以是绝对的-->
+        <file>${log.home_dir}/warn.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--保留的天数-->
+            <maxHistory>30</maxHistory>
+            <!--
+            当前日志超过指定大小进行压缩之后的文件名称以及文件的位置，位置是相对的，也可以是绝对的
+            -->
+            <fileNamePattern>${log.home_dir}/warn/warn-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--定义单个日志文件的大小最大值-->
+                <MaxFileSize>2mb</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>
+                <!--设置日志输出格式-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5p] %c:%L - %m%n
+            </pattern>
+        </encoder>
+
+        <!--warrn过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+    <!--文件追加器-->
+    <appender name="errorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--file:指定日志输出的位置及名称，位置可以是相对的也可以是绝对的-->
+        <file>${log.home_dir}/error.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--保留的天数-->
+            <maxHistory>30</maxHistory>
+            <!--
+            当前日志超过指定大小进行压缩之后的文件名称以及文件的位置，位置是相对的，也可以是绝对的
+            -->
+            <fileNamePattern>${log.home_dir}/error/error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--定义单个日志文件的大小最大值-->
+                <MaxFileSize>2mb</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>
+                <!--设置日志输出格式-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5p] %c:%L - %m%n
+            </pattern>
+        </encoder>
+
+        <!--error过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+    <!--日志的根标签-->
+    <root level="INFO">
+        <!--
+            root默认的日志级别是debug
+            ref属性：指定引用appender追加器name属性的值
+        -->
+        <appender-ref ref="console"/>
+        <appender-ref ref="infoFile"/>
+        <appender-ref ref="warnFile"/>
+        <appender-ref ref="errorFile"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,42 @@
+#spring:
+#  datasource:
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.47.130:3306/nameList?useUnicode=true&characterEncoding=utf8&useSSL=false
+#配置mybatis的mapper的xml
+#mybatis:
+#  mapper-locations: classpath:NameListMapperMysql.xml
+
+#标准DS库配置
+frms.etl.to:
+  #ds数据存储类型：db表示数据库   ds库
+  jdbcUrl: jdbc:mysql://192.168.47.130:3306/nameList?useUnicode=true&characterEncoding=utf8&useSSL=false
+  username: root
+  password: 123456
+  driverClassName: com.mysql.jdbc.Driver
+  connectionTestQuery: SELECT 1 from dual
+  maximumPoolSize: 20
+  minimumIdle: 5
+  defaultAutoCommit: false
+  maxLifetime: 200000000
+  connectionTimeout: 3000000
+  idleTimeout: 30000000
+  jdbc.type: mysql
+
+
+#标准DS库配置
+frms.etl.mgr:
+  #ds数据存储类型：db表示数据库   ds库
+  jdbcUrl: jdbc:mysql://192.168.47.129:3306/portal?useUnicode=true&characterEncoding=utf8&useSSL=false
+  username: root
+  password: 123456
+  driverClassName: com.mysql.jdbc.Driver
+  connectionTestQuery: SELECT 1 from dual
+  maximumPoolSize: 20
+  minimumIdle: 5
+  defaultAutoCommit: false
+  maxLifetime: 200000000
+  connectionTimeout: 3000000
+  idleTimeout: 30000000
+  jdbc.type: mysql

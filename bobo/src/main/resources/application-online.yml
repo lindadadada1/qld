@@ -1,0 +1,13 @@
+#服务器的端口
+server.port: 9180
+#应用访问路径
+server:
+  servlet:
+    context-path: /bobo
+#jsp
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+
